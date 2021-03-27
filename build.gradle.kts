@@ -13,7 +13,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testCompile("junit", "junit", "4.12")
+    //testCompile("junit", "junit", "4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     implementation("com.github.ajalt", "clikt", "2.1.0")//для консольных приложений
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>{
@@ -21,4 +23,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>{
 }
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>{
     manifest{attributes["Main-class"]="pack-rleKt"}
+}
+tasks.getByName<Test>("test"){
+    useJUnitPlatform()
 }
