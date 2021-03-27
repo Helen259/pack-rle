@@ -2,29 +2,56 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.File
 
-internal class RunnerKtTest{
+internal class RunnerKtTest {
     @Test
-    fun testPack(){
+    fun testPack() {
         val newFile = File("inpack.txt")
         newFile.writeText("аааагнр")
         pack("inpack.txt", "outpack.txt")
-       val file2= File("outpack.txt").readText()
-        assertEquals( "4а-3гнр", file2)
+        val file2 = File("outpack.txt").readText()
+        assertEquals("4а-3гнр", file2)
     }
+
     @Test
-    fun testPack2(){
+    fun testPack2() {
         val newFile = File("inpack2.txt")
         newFile.writeText("ппппрр\nннн")
         pack("inpack2.txt", "outpack2.txt")
-        val file2= File("outpack2.txt").readText()
-        assertEquals( "4п2р\n3н", file2)
+        val file2 = File("outpack2.txt").readText()
+        assertEquals("4п2р\n3н", file2)
     }
+
     @Test
-    fun testPack3(){
+    fun testPack3() {
         val newFile = File("inpack3.txt")
         newFile.writeText("а")
         pack("inpack3.txt", "outpack3.txt")
-        val file2= File("outpack3.txt").readText()
-        assertEquals( "-1а", file2)
+        val file2 = File("outpack3.txt").readText()
+        assertEquals("-1а", file2)
+    }
+
+    @Test
+    fun testUnpack() {
+        val newFile = File("outpack4.txt")
+        newFile.writeText("5а2г-4апро")
+        unpack("outpack4.txt", "inpack4.txt")
+        val file2 = File("inpack4.txt").readText()
+        assertEquals("аааааггапро", file2)
+    }
+    @Test
+    fun testUnpack2() {
+        val newFile = File("outpack5.txt")
+        newFile.writeText("5а2г\n6а")
+        unpack("outpack5.txt", "inpack5.txt")
+        val file2 = File("inpack5.txt").readText()
+        assertEquals("ааааагг\nаааааа", file2)
+    }
+    @Test
+    fun testUnpack3() {
+        val newFile = File("outpack6.txt")
+        newFile.writeText("-1а")
+        unpack("outpack6.txt", "inpack6.txt")
+        val file2 = File("inpack6.txt").readText()
+        assertEquals("а", file2)
     }
 }
