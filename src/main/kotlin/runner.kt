@@ -30,11 +30,11 @@ fun pack (inputName: String, outputName: String) {
             var countNon = -1
             while (i < line.length-1) {
 
-                while (i != line.length - 1 && line[i] == line[i + 1] && countRepeat != 9) {
+                while (i != line.length - 1 && line[i] == line[i + 1] && countRepeat <= 9) {
                     countRepeat++
                     i++
                 }
-                while (i != line.length - 1 && line[i] != line[i + 1] && countNon != 9)
+                while (i != line.length - 1 && line[i] != line[i + 1] && countNon <= 9)
                     countNon--
                     i++
                 if (countRepeat != 1) {
