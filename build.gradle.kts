@@ -10,7 +10,14 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
-
+sourceSets.getByName("main") {
+    java.srcDir("src/main/java")
+    java.srcDir("src/main/kotlin")
+}
+sourceSets.getByName("test") {
+    java.srcDir("src/test/java")
+    java.srcDir("src/test/kotlin")
+}
 dependencies {
     implementation(kotlin("stdlib"))
     //testCompile("junit", "junit", "4.12")
@@ -22,7 +29,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>{
     kotlinOptions.jvmTarget="1.8"
 }
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>{
-    manifest{attributes["Main-class"]="pack-rleKt"}
+    manifest{attributes["Main-class"]="packrle.PackrleKt"}
 }
 tasks.getByName<Test>("test"){
     useJUnitPlatform()
