@@ -24,10 +24,18 @@ internal class RunnerKtTest {
     @Test
     fun testPack3() {
         val newFile = File("inpack3.txt")
-        newFile.writeText("а")
+        newFile.writeText("ааааааааааа")
         pack("inpack3.txt", "outpack3.txt")
         val file2 = File("outpack3.txt").readText()
-        assertEquals("-1а", file2)
+        assertEquals("9а2а", file2)
+    }
+    @Test
+    fun testPack4() {
+        val newFile = File("inpack14.txt")
+        newFile.writeText("абвгдббббааааппп")
+        pack("inpack14.txt", "outpack14.txt")
+        val file2 = File("outpack14.txt").readText()
+        assertEquals("-5абвгд4б4а3п", file2)
     }
 
     @Test
