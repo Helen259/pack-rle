@@ -33,13 +33,10 @@ fun pack(inputName: String, outputName: String) {
             var countRepeat = 1
             val uniqueValues = mutableListOf<Char>()
             while (i < line.length) {
-                //var isUnique = false
                 while (i < line.length && (i == line.length - 1 || line[i] != line[i + 1] && uniqueValues.size < 9)) {
-                    //if (!isUnique) isUnique = true
                     uniqueValues.add(line[i])
                     i++
                 }
-               // if (isUnique) i++
                 if (uniqueValues.isNotEmpty()) {
                     res.append("-${uniqueValues.size}${uniqueValues.joinToString("")}")
                     uniqueValues.clear()
@@ -68,8 +65,8 @@ fun pack(inputName: String, outputName: String) {
     writer.close()
 }
 fun unpack(inputName: String, outputName: String) {
-    var writer = File(outputName).bufferedWriter()
-    var encodedLines= mutableListOf<String>()
+    val writer = File(outputName).bufferedWriter()
+    val encodedLines= mutableListOf<String>()
     File(inputName).bufferedReader().useLines { inpLines ->
         inpLines.forEach { line ->
             val res = StringBuilder()
