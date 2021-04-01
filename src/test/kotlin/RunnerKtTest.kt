@@ -58,9 +58,9 @@ internal class RunnerKtTest {
     @Test
     fun testUnpack3() {
         val newFile = File("outpack64.txt")
-        newFile.writeText("-1а")
+        newFile.writeText("9а4а")
         unpack("outpack64.txt", "inpack6.txt")
         val file2 = File("inpack6.txt").readText()
-        assertEquals("а", file2)
+        assertEquals("ааааааааааааа", file2)
     }
 }
