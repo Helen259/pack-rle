@@ -1,9 +1,12 @@
 package packrle
+
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import packrle.pack
+import packrle.unpack
 import java.io.File
 
-internal class RunnerKtTest {
+class RunnerKtTest {
     @Test
     fun testPack() {
         val newFile = File("inpack.txt")
@@ -25,11 +28,12 @@ internal class RunnerKtTest {
     @Test
     fun testPack3() {
         val newFile = File("inpack3.txt")
-        newFile.writeText("ааааааааааа")
+        newFile.writeText("аааааааааааааааааааааааааа")
         pack("inpack3.txt", "outpack3.txt")
         val file2 = File("outpack3.txt").readText()
-        assertEquals("9а2а", file2)
+        assertEquals("26а", file2)
     }
+
     @Test
     fun testPack4() {
         val newFile = File("inpack14.txt")
@@ -47,6 +51,7 @@ internal class RunnerKtTest {
         val file2 = File("inpack4.txt").readText()
         assertEquals("аааааггапро", file2)
     }
+
     @Test
     fun testUnpack2() {
         val newFile = File("outpack5.txt")
@@ -55,12 +60,34 @@ internal class RunnerKtTest {
         val file2 = File("inpack5.txt").readText()
         assertEquals("ааааагг\nаааааа", file2)
     }
+
     @Test
     fun testUnpack3() {
         val newFile = File("outpack64.txt")
-        newFile.writeText("9а4а")
+        newFile.writeText("13а")
         unpack("outpack64.txt", "inpack6.txt")
         val file2 = File("inpack6.txt").readText()
         assertEquals("ааааааааааааа", file2)
+    }
+
+    @Test
+    fun testRunner() {
+        val exception =
+                assertThrows(IllegalArgumentException::class.java) { Runner().main(listOf("-out", "test.txt", "input.txt")) }
+        assertEquals("Неправильно указан режим работы", exception.message)
+    }
+
+    @Test
+    fun testRunner2() {
+        val exception =
+                assertThrows(IllegalArgumentException::class.java) { Runner().main(listOf("-z", "-u", "-out", "test.txt", "input.txt")) }
+        assertEquals("Неправильно указан режим работы", exception.message)
+    }
+
+    @Test
+    fun testRunner3() {
+        val exception =
+                assertThrows(IllegalArgumentException::class.java) { Runner().main(listOf("-z", "-out", "test.txt", "nonExistingFile.txt")) }
+        assertEquals("Не был найден файл", exception.message)
     }
 }
